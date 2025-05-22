@@ -1,0 +1,1548 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Result School Wise by AKASH CHAUDHARY</title> <meta name="description" content="Find Rajasthan Board results school-wise for 10th and 12th class. Get detailed student results including marks and percentages by entering any roll number from the school. Powered by AKASH CHAUDHARY">
+    <meta name="keywords" content="Rajasthan Board Result, RBSE Result, 10th Result, 12th Result, School Wise Result, Rankguruji, Board Exam Results, Student Marks, Percentage, Roll Number Search">
+<link rel="icon" href="https://rankguruji.com/assets/img/rbse.png" type="image/png">
+
+<meta property="og:image" content="https://rankguruji.com/assets/img/rbse.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<script>
+(function(fzfqcjr){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = fzfqcjr || {};
+s.src = "\/\/primary-tool.com\/cADB9u6_b.2Y5clvSEWRQQ9sNRjJE\/4yNNzgUl4\/MYCT0K2bMxTIgZ3vNfT\/gAxb";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+    <script src="https://cdnjs.cloudflare.com/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+        html, body {
+            height: 100%; /* Ensure html and body take full height */
+            margin: 0;
+        }
+        body {
+            padding-top: 70px; /* Adjusted padding-top for fixed navbar */
+            background-color: #f8f9fa;
+            display: flex; /* Use flexbox for main layout */
+            flex-direction: column; /* Stack children vertically */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            transition: margin-right 0.3s ease; /* Smooth transition for content when sidebar opens */
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            /* Removed flex-grow: 1; to allow footer to stick to bottom naturally */
+            max-width: 960px; /* Max width for larger screens to reduce side space */
+            margin-left: auto; /* Center the container */
+            margin-right: auto; /* Center the container */
+            margin-bottom: 20px; /* Add some space above the footer */
+        }
+        .loading-spinner {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .student-table-container {
+            max-height: 10000px;
+            overflow-x: auto;
+            overflow-y: auto;
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .student-table {
+            width: 100%;
+            min-width: fit-content;
+        }
+        .student-table th, .student-table td {
+            white-space: nowrap; /* Prevent wrapping for table cells */
+            padding: 8px;
+        }
+        .student-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            z-index: 10;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap; /* Ensure header itself doesn't wrap */
+        }
+        .student-table thead th .sort-icon {
+            margin-left: 5px;
+            opacity: 0.4;
+        }
+        .student-table thead th.sorted-asc .sort-icon.fa-sort-up,
+        .student-table thead th.sorted-desc .sort-icon.fa-sort-down {
+            opacity: 1;
+        }
+        /* Hide info text by default */
+        .alert-info {
+            display: none;
+        }
+        /* Hide results count by default */
+        #resultsCount {
+            display: none;
+        }
+        #printResultsBtn, #downloadPdfBtn {
+            margin-top: 10px;
+            display: none; /* Download PDF is hidden by default, controlled by settings */
+        }
+        .summary-card {
+            margin-top: 15px; /* Reduced margin */
+            padding: 0; /* Removed padding */
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            page-break-inside: avoid; /* Keep summary card together on print */
+        }
+        .summary-card h5 {
+            margin-bottom: 15px;
+            color: #343a40;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .summary-table th, .summary-table td {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+        .summary-table thead th {
+            background-color: #e9ecef;
+        }
+
+        /* Responsive Buttons */
+        .desktop-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            gap: 10px; /* Space between buttons */
+            margin-top: 10px;
+        }
+        .desktop-buttons .btn {
+            flex: 1 1 auto; /* Allows buttons to grow and shrink */
+            max-width: 200px; /* Max width for individual buttons on larger screens */
+        }
+        @media (max-width: 576px) { /* Stack buttons on very small screens */
+            .desktop-buttons .btn {
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+
+        /* --- Side Menu Styles --- */
+        .side-menu {
+            height: 100vh;
+            width: 0;
+            position: fixed;
+            z-index: 1000; /* Ensure it's on top */
+            top: 0;
+            right: 0; /* Position from right */
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            border-left: 1px solid #dee2e6; /* Border on left */
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Shadow adjusted for right side */
+        }
+
+        .side-menu.open {
+            width: 280px; /* Adjust width as needed for new content */
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 0;
+            left: 25px; /* Close button on left inside menu */
+            font-size: 36px;
+            margin-right: 50px; /* Adjusted margin */
+            text-decoration: none;
+            color: #000;
+        }
+
+        .side-menu-content {
+            padding: 15px;
+        }
+        .side-menu-content h5 {
+            margin-bottom: 20px;
+        }
+        .side-menu-content .form-check {
+            margin-bottom: 10px;
+        }
+        /* Style for buttons inside side menu */
+        .side-menu-content .btn {
+            width: 100%;
+            margin-top: 15px; /* Add some space above buttons */
+        }
+
+        /* Floating button in bottom right */
+        #openSideMenuBtn {
+            position: fixed;
+            bottom: 20px; /* Distance from bottom */
+            right: 20px; /* Distance from right */
+            z-index: 1001; /* Above the side menu */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 10px; /* Reduced padding */
+            border-radius: 50%; /* Make it round */
+            cursor: pointer;
+            font-size: 1em; /* Smaller icon */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow for floating effect */
+            transition: background-color 0.3s ease;
+        }
+
+        #openSideMenuBtn:hover {
+            background-color: #0056b3;
+        }
+
+        body.side-menu-open {
+            margin-right: 280px; /* Push main content to the left */
+        }
+
+        /* School Info Display */
+        #schoolInfoDisplay {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        #schoolNameDisplay {
+            font-size: 1.5em;
+            margin-bottom: 5px; /* Space below school name */
+        }
+        #classYearDisplay {
+            font-size: 1.1em;
+            color: #6c757d;
+        }
+
+        /* Watermark Styles (default hidden) */
+        .watermark {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 3em;
+            color: rgba(0, 0, 0, 0.1); /* Light and transparent */
+            z-index: -1; /* Behind other content */
+            pointer-events: none; /* Prevents interference with clicks/selection */
+            white-space: nowrap; /* Keep text on one line */
+        }
+
+        /* Footer Styles */
+        .footer {
+            margin-top: auto; /* Push footer to the bottom */
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85em;
+        }
+
+        .developer-name {
+            font-weight: bold;
+            color: #007bff; /* Bootstrap primary blue */
+        }
+
+        /* --- Styles for PDF Capture (Mirrors @media print) --- */
+        body.pdf-capture-mode {
+            margin-left: 0 !important;
+            padding-top: 0 !important;
+            margin: 0 !important;
+            padding: 5mm !important;
+        }
+        body.pdf-capture-mode #rollNumberForm,
+        body.pdf-capture-mode .desktop-buttons, /* Hide buttons in PDF capture */
+        body.pdf-capture-mode .alert-info,
+        body.pdf-capture-mode #resultsCount,
+        body.pdf-capture-mode .side-menu,
+        body.pdf-capture-mode #openSideMenuBtn,
+        body.pdf-capture-mode #errorMessage,
+        body.pdf-capture-mode .navbar /* Hide navbar in PDF capture */
+        {
+            display: none !important;
+        }
+        body.pdf-capture-mode #resultsSection {
+            display: block !important;
+            position: static !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        body.pdf-capture-mode .container {
+            box-shadow: none !important;
+            max-width: none !important;
+            margin: 0 !important;
+            width: 100% !important;
+            padding: 0 !important; /* Removed padding-bottom */
+        }
+        body.pdf-capture-mode .student-table-container {
+            max-height: none !important;
+            overflow: visible !important;
+            border: none !important;
+            /* Allow table to break across pages - page-break-inside: avoid; is removed */
+        }
+        body.pdf-capture-mode .student-table {
+            font-size: 0.55em;
+            width: 100% !important;
+            table-layout: auto;
+            /* Allow table rows to break - page-break-inside: avoid; is removed */
+        }
+        body.pdf-capture-mode .student-table th, body.pdf-capture-mode .student-table td {
+            white-space: nowrap !important; /* Keep nowrap for headers/cells */
+            padding: 1px 2px !important;
+            word-break: break-all; /* Allow words to break if column is too narrow */
+        }
+        body.pdf-capture-mode .student-table thead {
+            display: table-header-group;
+        }
+        body.pdf-capture-mode .student-table thead th {
+            position: static !important;
+            background-color: #f8f9fa !important;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+        }
+        body.pdf-capture-mode .student-table thead th .sort-icon {
+            display: none !important;
+        }
+        body.pdf-capture-mode {
+            color: #000 !important;
+        }
+        body.pdf-capture-mode .text-muted {
+            color: #000 !important;
+        }
+        body.pdf-capture-mode #schoolInfoDisplay {
+            text-align: center !important;
+            margin-bottom: 0.5rem !important;
+            /* Flex container for reordering header elements */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        body.pdf-capture-mode #schoolNameDisplay {
+            font-size: 1em !important;
+            font-weight: bold !important;
+            display: block !important;
+            margin-bottom: 0 !important;
+            order: 1; /* School Name first */
+        }
+        body.pdf-capture-mode #classYearDisplay {
+            font-size: 0.9em !important;
+            display: block !important;
+            color: #000 !important;
+            margin-bottom: 0 !important; /* Reduced spacing */
+            order: 2; /* Class/Year second */
+        }
+        /* Main H2 (Board Result School Wise) should be visible in PDF capture */
+        body.pdf-capture-mode h2.text-center {
+            display: block !important;
+            font-size: 1.2em !important;
+            margin-bottom: 10px !important;
+            color: #000 !important;
+        }
+
+        body.pdf-capture-mode #summaryCard {
+            box-shadow: none !important;
+            border: 1px solid #dee2e6 !important;
+            background-color: #f8f9fa !important;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            margin-top: 5mm !important; /* Reduced margin */
+            page-break-inside: avoid; /* Prevent summary card from breaking */
+        }
+        body.pdf-capture-mode .watermark {
+            display: block !important;
+        }
+        body.pdf-capture-mode .footer {
+            display: block !important;
+            position: static !important; /* Changed from fixed */
+            background-color: #f8f9fa !important; /* Explicit background for print */
+            padding: 5px 0 !important;
+            border-top: 1px solid #e9ecef !important; /* Keep border for consistency */
+            color: #000 !important; /* Ensure readable text color */
+            font-size: 0.65em !important;
+            text-align: center;
+            margin-top: 0 !important; /* No auto margin in fixed position */
+            -webkit-print-color-adjust: exact; /* Ensure background color prints */
+            color-adjust: exact;
+        }
+
+
+        /* --- Print Styles --- (Keep for actual printing) */
+        @media print {
+            /* Hide specific elements that shouldn't be printed */
+            #rollNumberForm,
+            .desktop-buttons, /* Hide buttons in print */
+            .alert-info, /* Hide info text */
+            #resultsCount, /* Hide "Found 0 students" text */
+            .side-menu, /* Hide side menu */
+            #openSideMenuBtn, /* Hide menu button */
+            #errorMessage, /* Hide error message in print */
+            .navbar /* Hide navbar in print */
+            {
+                display: none !important;
+            }
+
+            body {
+                margin-left: 0 !important;
+                padding-top: 0 !important;
+                margin: 0 !important;
+                padding: 5mm !important;
+            }
+
+            /* Ensure only the results section is visible and properly formatted */
+            #resultsSection {
+                display: block !important;
+                position: static !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .container {
+                box-shadow: none !important;
+                max-width: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                padding: 0 !important; /* Removed padding-bottom */
+            }
+            .student-table-container {
+                max-height: none !important;
+                overflow: visible !important;
+                border: none !important;
+                /* Allow table to break across pages - page-break-inside: avoid; is removed */
+            }
+            .student-table {
+                font-size: 0.55em;
+                width: 100% !important;
+                table-layout: auto;
+                /* Allow table rows to break - page-break-inside: avoid; is removed */
+            }
+            /* Apply normal white-space to both th and td for wrapping */
+            .student-table th, .student-table td {
+                white-space: nowrap !important; /* Keep nowrap for headers/cells */
+                padding: 1px 2px !important;
+                word-break: break-all; /* Allow words to break if column is too narrow */
+            }
+            .student-table thead {
+                display: table-header-group;
+            }
+            .student-table thead th {
+                position: static !important;
+                background-color: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .student-table thead th .sort-icon {
+                display: none !important;
+            }
+            body {
+                color: #000 !important;
+            }
+            .text-muted {
+                color: #000 !important;
+            }
+            /* Adjustments for school name and class display in print */
+            #schoolInfoDisplay {
+                text-align: center !important;
+                margin-bottom: 0.5rem !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            #schoolNameDisplay {
+                font-size: 1em !important;
+                font-weight: bold !important;
+                display: block !important;
+                margin-bottom: 0 !important;
+                order: 1;
+            }
+            #classYearDisplay {
+                font-size: 0.9em !important;
+                display: block !important;
+                color: #000 !important;
+                margin-bottom: 0 !important;
+                order: 2;
+            }
+            /* Main H2 (Board Result School Wise) should be visible in print */
+            h2.text-center {
+                display: block !important;
+                font-size: 1.2em !important;
+                margin-bottom: 10px !important;
+                color: #000 !important;
+            }
+            /* Ensure summary card prints correctly */
+            #summaryCard {
+                box-shadow: none !important;
+                border: 1px solid #dee2e6 !important;
+                background-color: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                margin-top: 5mm !important;
+                page-break-inside: avoid;
+            }
+
+            /* Watermark visible only in print */
+            .watermark {
+                display: block !important;
+            }
+
+            /* Footer visible in print and not fixed at bottom of each page */
+            .footer {
+                display: block !important;
+                position: static !important; /* Changed from fixed */
+                background-color: #f8f9fa !important; /* Explicit background for print */
+                padding: 5px 0 !important;
+                border-top: 1px solid #e9ecef !important; /* Keep border for consistency */
+                color: #000 !important; /* Ensure readable text color */
+                font-size: 0.65em !important;
+                text-align: center;
+                margin-top: 0 !important; /* No auto margin in fixed position */
+                -webkit-print-color-adjust: exact; /* Ensure background color prints */
+                color-adjust: exact;
+            }
+        </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"> <div class="container-fluid">
+            <a class="navbar-brand" href="https://rankguruji.com" target="_blank" rel="noopener noreferrer">AKASH CHAUDHARY</a>
+        </div>
+    </nav>
+
+    <button id="openSideMenuBtn" title="Settings"><i class="fas fa-cog"></i></button>
+
+    <aside id="sideMenu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" id="closeSideMenuBtn">&times;</a>
+        <div class="side-menu-content">
+            <h5>Column Visibility Settings</h5>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="includePersonalDetails" checked>
+                <label class="form-check-label" for="includePersonalDetails">Include Full Personal Details (Name, Father's Name, etc.)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="hideMothersName">
+                <label class="form-check-label" for="hideMothersName">Show Mother's Name</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="hideEmptySubjectColumns" checked>
+                <label class="form-check-label" for="hideEmptySubjectColumns">Show All Subject Columns (Even Empty)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="hideTrailingEmptySubjectColumns" checked>
+                <label class="form-check-label" for="hideTrailingEmptySubjectColumns">Hide Trailing Empty Subjects (from first blank SC onwards)</label>
+            </div>
+            <hr>
+            <h5>Display Settings</h5>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="showDownloadPdfBtnCheckbox">
+                <label class="form-check-label" for="showDownloadPdfBtnCheckbox">Show Download PDF Button</label>
+            </div>
+            <hr>
+            <button type="button" class="btn btn-secondary mt-2" id="clearCacheBtn">Clear Cached Results</button>
+            <p><small class="text-muted mt-3 d-block">Changes apply after fetching new results or toggling "Include Full Personal Details".</small></p>
+        </div>
+    </aside>
+
+    <div class="container">
+        <h2 class="text-center mb-4">Board Result School Wise by <a href="" target="_blank" rel="noopener noreferrer">AKASH CHAUDHARY</a></h2>
+
+        <form id="rollNumberForm">
+            <div class="mb-3">
+                <label for="boardSelect" class="form-label">Select Board:</label>
+                <select class="form-select" id="boardSelect" required>
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="yearSelect" class="form-label">Select Year:</label>
+                <select class="form-select" id="yearSelect" required>
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="classSelect" class="form-label">Select Class (Std):</label>
+                <select class="form-select" id="classSelect" required>
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="initialRollNo" class="form-label">Enter a Roll Number:</label>
+                <input type="number" class="form-control" id="initialRollNo" required placeholder="e.g., 2503146">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Fetch School Results</button>
+        </form>
+        <div class="desktop-buttons">
+            <button type="button" class="btn btn-info" id="printResultsBtn" aria-label="Print Results">
+                <i class="fas fa-print"></i> Print Results
+            </button>
+            <button type="button" class="btn btn-primary" id="downloadPdfBtn" aria-label="Download PDF">
+                <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+        </div>
+
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 text-muted">Searching for students... (This may take a while)</p>
+            <p id="currentSearchInfo" class="mt-1 text-muted"></p>
+        </div>
+
+        <div id="resultsSection" class="mt-4" style="display: none;">
+            <div id="schoolInfoDisplay">
+                <h5 id="schoolNameDisplay"><strong></strong></h5>
+                <h4 id="classYearDisplay">Class: <span id="classDisplay"></span>, Year: <span id="yearDisplay"></span></h4>
+            </div>
+            <div class="table-responsive student-table-container">
+                <table class="table table-bordered table-striped table-hover student-table">
+                    <thead>
+                        <tr>
+                            <th data-column-key="srno">S.No. <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="rollno">Roll No. <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="name">Name <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="fathersName">Father's Name <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="mothersName">Mother's Name <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="totalMarks">Total Marks <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="percentage">Percentage <i class="fas fa-sort sort-icon"></i></th>
+                            <th data-column-key="result">Result <i class="fas fa-sort sort-icon"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="summaryCard" class="summary-card" style="display: none;">
+                <div class="table-responsive">
+                    <table class="table table-bordered summary-table">
+                        <thead id="summaryTableHeader">
+                            <tr>
+                                <th colspan="9">Result Summary</th> </tr>
+                        </thead>
+                        <tbody id="summaryTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;"></div>
+    </div>
+
+    <div class="watermark">AKASH CHAUDHARY</div>
+
+    <footer class="footer">
+        This project is Developed by <span class="developer-name">AKASH CHAUDHARY</span> 
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('rollNumberForm');
+            const boardSelect = document.getElementById('boardSelect');
+            const yearSelect = document.getElementById('yearSelect');
+            const classSelect = document.getElementById('classSelect');
+            const initialRollNoInput = document.getElementById('initialRollNo');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const currentSearchInfo = document.getElementById('currentSearchInfo');
+            const resultsSection = document.getElementById('resultsSection');
+            const schoolInfoDisplay = document.getElementById('schoolInfoDisplay');
+            const classYearDisplay = document.getElementById('classYearDisplay');
+            const classDisplay = document.getElementById('classDisplay');
+            const yearDisplay = document.getElementById('yearDisplay');
+            const schoolNameDisplay = document.getElementById('schoolNameDisplay');
+            const resultsTableBody = document.getElementById('resultsTableBody');
+            const errorMessageDiv = document.getElementById('errorMessage');
+            const printResultsBtn = document.getElementById('printResultsBtn');
+            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+
+            const summaryCard = document.getElementById('summaryCard');
+            const summaryTableHeader = document.getElementById('summaryTableHeader');
+            const summaryTableBody = document.getElementById('summaryTableBody');
+
+            // Side Menu Elements
+            const openSideMenuBtn = document.getElementById('openSideMenuBtn');
+            const closeSideMenuBtn = document.getElementById('closeSideMenuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const body = document.body;
+
+            // Column visibility checkboxes
+            const includePersonalDetailsCheckbox = document.getElementById('includePersonalDetails');
+            const hideMothersNameCheckbox = document.getElementById('hideMothersName');
+            const hideEmptySubjectColumnsCheckbox = document.getElementById('hideEmptySubjectColumns');
+            const hideTrailingEmptySubjectColumnsCheckbox = document.getElementById('hideTrailingEmptySubjectColumns');
+            const showDownloadPdfBtnCheckbox = document.getElementById('showDownloadPdfBtnCheckbox');
+            const clearCacheBtn = document.getElementById('clearCacheBtn');
+            const watermark = document.querySelector('.watermark');
+            const footer = document.querySelector('.footer');
+
+            let targetSchoolName = '';
+            let final_result = {};
+            let processedRollNumbers = new Set();
+            let allSubjectHeaders = new Set();
+            let selectedClassText = '';
+            let selectedYear = '';
+
+            let currentSortColumn = 'rollno';
+            let currentSortDirection = 'asc';
+
+            const API_URL = 'https://rankguruji.com/api/rajresults/';
+            const CACHE_PREFIX = 'studentResult_';
+            const MAX_CONSECUTIVE_MISSES = 5;
+
+            // --- Board, Year, Class Population (Simplified) ---
+            function populateBoards() {
+                boardSelect.innerHTML = '<option value="rj">Rajasthan</option>'; /* Changed text to Rajasthan */
+                boardSelect.value = 'rj'; // Default to RJ
+                populateYears();
+            }
+
+            function populateYears() {
+                yearSelect.innerHTML = ''; // Clear existing options
+                const years = ['2025', '2024']; // Static list of years
+                years.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                });
+                yearSelect.value = '2025'; // Default to 2025
+                populateClasses();
+            }
+
+            function populateClasses() {
+                classSelect.innerHTML = ''; // Clear existing options
+                const classes = ['12th', '10th']; // Static list of classes
+                classes.forEach(className => {
+                    const option = document.createElement('option');
+                    option.value = className.replace('th', ''); // Store as '12' or '10'
+                    option.textContent = className;
+                    classSelect.appendChild(option);
+                });
+                classSelect.value = '12'; // Default to 12th
+                errorMessageDiv.style.display = 'none'; // Ensure no error message from previous dependent logic
+            }
+
+            // --- Side Menu Functionality ---
+            openSideMenuBtn.addEventListener('click', () => {
+                if (sideMenu.classList.contains('open')) {
+                    sideMenu.classList.remove('open');
+                    body.classList.remove('side-menu-open');
+                } else {
+                    sideMenu.classList.add('open');
+                    body.classList.add('side-menu-open');
+                }
+            });
+
+            closeSideMenuBtn.addEventListener('click', () => {
+                sideMenu.classList.remove('open');
+                body.classList.remove('side-menu-open');
+            });
+
+            // Persist settings in localStorage
+            function saveSettings() {
+                localStorage.setItem('includePersonalDetails', includePersonalDetailsCheckbox.checked);
+                localStorage.setItem('hideMothersName', hideMothersNameCheckbox.checked);
+                localStorage.setItem('hideEmptySubjectColumns', hideEmptySubjectColumnsCheckbox.checked);
+                localStorage.setItem('hideTrailingEmptySubjectColumns', hideTrailingEmptySubjectColumnsCheckbox.checked);
+                localStorage.setItem('showDownloadPdfBtn', showDownloadPdfBtnCheckbox.checked); // Save new setting
+            }
+
+            function loadSettings() {
+                const storedIncludePersonalDetails = localStorage.getItem('includePersonalDetails');
+                const storedHideMothersName = localStorage.getItem('hideMothersName');
+                const storedHideEmptySubjectColumns = localStorage.getItem('hideEmptySubjectColumns');
+                const storedHideTrailingEmptySubjectColumns = localStorage.getItem('hideTrailingEmptySubjectColumns');
+                const storedShowDownloadPdfBtn = localStorage.getItem('showDownloadPdfBtn'); // Load new setting
+
+                if (storedIncludePersonalDetails !== null) {
+                    includePersonalDetailsCheckbox.checked = storedIncludePersonalDetails === 'true';
+                } else {
+                    includePersonalDetailsCheckbox.checked = true;
+                }
+                if (storedHideMothersName !== null) {
+                    hideMothersNameCheckbox.checked = storedHideMothersName === 'true';
+                } else {
+                    hideMothersNameCheckbox.checked = false;
+                }
+                if (storedHideEmptySubjectColumns !== null) {
+                    hideEmptySubjectColumnsCheckbox.checked = storedHideEmptySubjectColumns === 'true';
+                } else {
+                    hideEmptySubjectColumnsCheckbox.checked = true;
+                }
+                if (storedHideTrailingEmptySubjectColumns !== null) {
+                    hideTrailingEmptySubjectColumnsCheckbox.checked = storedHideTrailingEmptySubjectColumns === 'true';
+                } else {
+                    hideTrailingEmptySubjectColumnsCheckbox.checked = true;
+                }
+                if (storedShowDownloadPdfBtn !== null) {
+                    showDownloadPdfBtnCheckbox.checked = storedShowDownloadPdfBtn === 'true';
+                } else {
+                    showDownloadPdfBtnCheckbox.checked = false; // Default to hidden
+                }
+                // Apply the setting immediately to the button visibility
+                downloadPdfBtn.style.display = showDownloadPdfBtnCheckbox.checked ? 'inline-block' : 'none';
+            }
+
+            // Event listeners for settings checkboxes
+            includePersonalDetailsCheckbox.addEventListener('change', () => {
+                saveSettings();
+                renderResultsTable();
+            });
+
+            hideMothersNameCheckbox.addEventListener('change', () => {
+                saveSettings();
+                renderResultsTable();
+            });
+
+            hideEmptySubjectColumnsCheckbox.addEventListener('change', () => {
+                saveSettings();
+                renderResultsTable();
+            });
+
+            hideTrailingEmptySubjectColumnsCheckbox.addEventListener('change', () => {
+                saveSettings();
+                renderResultsTable();
+            });
+
+            // New event listener for Download PDF button visibility
+            showDownloadPdfBtnCheckbox.addEventListener('change', () => {
+                saveSettings();
+                downloadPdfBtn.style.display = showDownloadPdfBtnCheckbox.checked ? 'inline-block' : 'none';
+            });
+
+            // --- Other Event Listeners ---
+            clearCacheBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear all cached student results? This will require new API calls.')) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key.startsWith(CACHE_PREFIX)) {
+                            localStorage.removeItem(key);
+                        }
+                    }
+                    alert('Cached results cleared!');
+                    resetUI();
+                    populateBoards(); // Re-populate dropdowns after clearing cache
+                }
+            });
+
+            printResultsBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            downloadPdfBtn.addEventListener('click', () => {
+                generatePdf();
+            });
+
+            function setupSortingListeners() {
+                const currentTableHeaders = document.querySelectorAll('.student-table thead th[data-column-key]');
+                currentTableHeaders.forEach(header => {
+                    header.removeEventListener('click', handleHeaderClick);
+                    header.addEventListener('click', handleHeaderClick);
+                });
+            }
+
+            function handleHeaderClick() {
+                const columnKey = this.dataset.columnKey;
+                if (!columnKey) return;
+
+                if (currentSortColumn === columnKey) {
+                    currentSortDirection = (currentSortDirection === 'asc') ? 'desc' : 'asc';
+                } else {
+                    currentSortColumn = columnKey;
+                    currentSortDirection = 'asc';
+                }
+                renderResultsTable();
+            }
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const initialRollNo = parseInt(initialRollNoInput.value, 10);
+                if (isNaN(initialRollNo)) {
+                    displayError('Please enter a valid roll number.');
+                    return;
+                }
+
+                const selectedBoard = boardSelect.value;
+                selectedYear = yearSelect.value;
+                const selectedClass = classSelect.value;
+                selectedClassText = classSelect.options[classSelect.selectedIndex].textContent;
+
+                resetUI(); // Reset UI before starting new search
+
+                showLoading(true);
+                currentSearchInfo.textContent = `Searching initial roll number: ${initialRollNo}...`;
+
+                try {
+                    const initialData = await fetchStudentResult(selectedBoard, selectedYear, selectedClass, initialRollNo);
+
+                    const fetchedSchoolName = initialData?.CENT_NAME?.trim();
+                    if (initialData && fetchedSchoolName) {
+                        targetSchoolName = fetchedSchoolName;
+                        schoolNameDisplay.querySelector('strong').textContent = targetSchoolName;
+                        classDisplay.textContent = selectedClassText;
+                        yearDisplay.textContent = selectedYear;
+                        schoolInfoDisplay.style.display = 'block';
+                        addStudentToFoundStudents(initialData);
+
+                        // Set the dynamic page title including "by rankguruji.com"
+                        document.title = `Result ${selectedYear} of Class ${selectedClassText} of ${targetSchoolName} by rankguruji.com`;
+
+                        let currentLowestRollNo = initialRollNo;
+                        await searchDirection(selectedBoard, selectedYear, selectedClass, initialRollNo - 1, -1, (foundRollNo) => {
+                            currentLowestRollNo = Math.min(currentLowestRollNo, foundRollNo);
+                        });
+
+                        await searchDirection(selectedBoard, selectedYear, selectedClass, currentLowestRollNo + 1, 1);
+
+                        renderResultsTable();
+                        generateSummary();
+                        showLoading(false);
+                        resultsSection.style.display = 'block';
+                        printResultsBtn.style.display = 'inline-block';
+                        // Show download PDF button only if the setting is enabled
+                        if (showDownloadPdfBtnCheckbox.checked) {
+                            downloadPdfBtn.style.display = 'inline-block';
+                        }
+
+                    } else {
+                        displayError(initialData?.error_message || 'Could not fetch initial student details or school name. Please ensure the roll number is valid.');
+                        showLoading(false);
+                        document.title = 'Board Result School Wise by rankguruji.com'; // Reset title on error
+                    }
+
+                } catch (error) {
+                    console.error('An unhandled scraping error occurred:', error);
+                    displayError(`An unexpected error occurred: ${error.message}. Please check console for details.`);
+                    showLoading(false);
+                    document.title = 'Board Result School Wise by rankguruji.com'; // Reset title on error
+                }
+            });
+
+            function resetUI() {
+                errorMessageDiv.style.display = 'none';
+                resultsSection.style.display = 'none';
+                summaryCard.style.display = 'none';
+                printResultsBtn.style.display = 'none';
+                downloadPdfBtn.style.display = 'none'; // Ensure it's hidden on reset
+                resultsTableBody.innerHTML = '';
+                targetSchoolName = '';
+                schoolNameDisplay.querySelector('strong').textContent = '';
+                classDisplay.textContent = '';
+                yearDisplay.textContent = '';
+                schoolInfoDisplay.style.display = 'none';
+                final_result = {};
+                processedRollNumbers = new Set();
+                allSubjectHeaders = new Set();
+                const currentTableHeaders = document.querySelectorAll('.student-table thead th');
+                currentTableHeaders.forEach(th => {
+                    th.classList.remove('sorted-asc', 'sorted-desc');
+                    const icon = th.querySelector('.sort-icon');
+                    if (icon) {
+                        icon.classList.remove('fa-sort-up', 'fa-sort-down');
+                        icon.classList.add('fa-sort');
+                        icon.style.opacity = '0.4';
+                    }
+                });
+                currentSortColumn = 'rollno';
+                currentSortDirection = 'asc';
+                loadSettings(); // Reload settings to apply default/saved visibility for buttons
+                document.title = 'Board Result School Wise by rankguruji.com'; // Reset title to default
+            }
+
+            function showLoading(show) {
+                loadingSpinner.style.display = show ? 'flex' : 'none';
+                form.querySelector('button[type="submit"]').disabled = show;
+            }
+
+            function displayError(message) {
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.style.display = 'block';
+            }
+
+            async function fetchStudentResult(board, year, std, rollNo) {
+                const cacheKey = `${CACHE_PREFIX}${board}_${year}_${std}_${rollNo}`;
+                const cachedData = localStorage.getItem(cacheKey);
+
+                if (cachedData) {
+                    processedRollNumbers.add(rollNo);
+                    return JSON.parse(cachedData);
+                }
+
+                if (processedRollNumbers.has(rollNo)) {
+                    return null;
+                }
+                processedRollNumbers.add(rollNo);
+
+                currentSearchInfo.textContent = `Searching for roll number: ${rollNo}... (Found ${Object.keys(final_result).length} students so far)`;
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ board, year, std, roll_no: rollNo })
+                    });
+
+                    if (!response.ok) {
+                        let errorData;
+                        try {
+                            errorData = await response.json();
+                        } catch (e) {
+                            errorData = { error: response.statusText || 'Unknown error' };
+                        }
+
+                        if (response.status === 404) {
+                             return null;
+                        }
+                        throw new Error(errorData.error || `API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data && data.ROLL_NO) {
+                        localStorage.setItem(cacheKey, JSON.stringify(data));
+                    }
+                    return data;
+
+                } catch (error) {
+                    console.error(`Error fetching result for ${rollNo}:`, error);
+                    processedRollNumbers.delete(rollNo);
+                    return null;
+                }
+            }
+
+            async function searchDirection(board, year, std, startRollNo, direction, onFoundCallback = null) {
+                let currentRollNo = startRollNo;
+                const MAX_ITERATIONS = 1000;
+                let iterations = 0;
+                let consecutiveMisses = 0;
+
+                while (iterations < MAX_ITERATIONS && consecutiveMisses < MAX_CONSECUTIVE_MISSES) {
+                    iterations++;
+                    if (currentRollNo < 1000000 || currentRollNo > 9999999) {
+                         break;
+                    }
+
+                    const studentData = await fetchStudentResult(board, year, std, currentRollNo);
+
+                    const schoolName = studentData?.CENT_NAME?.trim();
+
+                    if (studentData && schoolName) {
+                        if (schoolName === targetSchoolName) {
+                            addStudentToFoundStudents(studentData);
+                            consecutiveMisses = 0;
+                            if (onFoundCallback) {
+                                onFoundCallback(currentRollNo);
+                            }
+                        } else {
+                            consecutiveMisses++;
+                        }
+                    } else {
+                        consecutiveMisses++;
+                    }
+
+                    currentRollNo += direction;
+                }
+                if (consecutiveMisses >= MAX_CONSECUTIVE_MISSES) {
+                    console.warn(`Stopped ${direction === -1 ? 'decreasing' : 'increasing'} search due to ${MAX_CONSECUTIVE_MISSES} consecutive misses.`);
+                    return false;
+                }
+                return true;
+            }
+
+            function addStudentToFoundStudents(data) {
+                const rollNo = data.ROLL_NO;
+                if (!final_result[rollNo]) {
+                    final_result[rollNo] = data;
+
+                    for (let i = 1; i <= 13; i++) {
+                        const subjectCode = `SC${i}`;
+                        const totalCode = `TOT${i}`;
+                        if (data[subjectCode] && data[subjectCode].trim() !== '') {
+                            allSubjectHeaders.add(`${data[subjectCode].trim()}_${totalCode}`);
+                        }
+                    }
+                }
+            }
+
+            function renderResultsTable() {
+                resultsTableBody.innerHTML = '';
+                updateTableHeaders();
+
+                const includePersonal = includePersonalDetailsCheckbox.checked;
+                const showMothersName = hideMothersNameCheckbox.checked;
+                const showEmptySubjectColumns = hideEmptySubjectColumnsCheckbox.checked;
+                const hideTrailingEmptySubjectColumns = hideTrailingEmptySubjectColumnsCheckbox.checked;
+
+
+                let studentsArray = Object.values(final_result);
+
+                let actualSubjectHeaders = Array.from(allSubjectHeaders);
+
+                if (!showEmptySubjectColumns) {
+                    actualSubjectHeaders = actualSubjectHeaders.filter(headerKey => {
+                        const subjectName = headerKey.split('_')[0];
+                        return studentsArray.some(student => {
+                            for (let i = 1; i <= 13; i++) {
+                                const subjectCode = `SC${i}`;
+                                const totalCode = `TOT${i}`;
+                                if (student[subjectCode]?.trim() === subjectName && student[totalCode]?.trim() !== '') {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        });
+                    });
+                }
+
+                if (hideTrailingEmptySubjectColumns) {
+                    let firstEmptySubjectIndex = -1;
+                    for (let i = 1; i <= 13; i++) {
+                        const subjectCode = `SC${i}`;
+                        const allStudentsHaveEmptySubject = studentsArray.every(student => {
+                            const subjectValue = student[subjectCode];
+                            return !subjectValue || subjectValue.trim() === '';
+                        });
+
+                        if (allStudentsHaveEmptySubject) {
+                            firstEmptySubjectIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (firstEmptySubjectIndex !== -1) {
+                        actualSubjectHeaders = actualSubjectHeaders.filter(headerKey => {
+                            let headerSCIndex = -1;
+                            for (const rollNo in final_result) {
+                                const student = final_result[rollNo];
+                                for (let i = 1; i <= 13; i++) {
+                                    if (student[`SC${i}`] && `${student[`SC${i}`].trim()}_TOT${i}` === headerKey) {
+                                        headerSCIndex = i;
+                                        break;
+                                    }
+                                }
+                                if (headerSCIndex !== -1) break;
+                            }
+                            return headerSCIndex !== -1 && headerSCIndex < firstEmptySubjectIndex;
+                        });
+                    }
+                }
+
+
+                const sortedSubjectHeaders = actualSubjectHeaders.sort((a, b) => {
+                    let indexA = -1;
+                    let indexB = -1;
+
+                    for (const rollNo in final_result) {
+                        const student = final_result[rollNo];
+                        for (let i = 1; i <= 13; i++) {
+                            if (`${student[`SC${i}`]?.trim()}_TOT${i}` === a) {
+                                indexA = i;
+                                break;
+                            }
+                        }
+                        if (indexA !== -1) break;
+                    }
+
+                    for (const rollNo in final_result) {
+                        const student = final_result[rollNo];
+                        for (let i = 1; i <= 13; i++) {
+                            if (`${student[`SC${i}`]?.trim()}_TOT${i}` === b) {
+                                indexB = i;
+                                break;
+                            }
+                        }
+                        if (indexB !== -1) break;
+                    }
+                    return indexA - indexB;
+                });
+
+
+                studentsArray.sort((a, b) => {
+                    let valA, valB;
+
+                    if (currentSortColumn === 'srno' || currentSortColumn === 'rollno') {
+                        valA = parseInt(a.ROLL_NO, 10) || 0;
+                        valB = parseInt(b.ROLL_NO, 10) || 0;
+                    } else if (currentSortColumn === 'name') {
+                        valA = a.CAN_NAME?.trim().toLowerCase() || '';
+                        valB = b.CAN_NAME?.trim().toLowerCase() || '';
+                    } else if (currentSortColumn === 'fathersName') {
+                        valA = a.FNAME?.trim().toLowerCase() || '';
+                        valB = b.FNAME?.trim().toLowerCase() || '';
+                    } else if (currentSortColumn === 'mothersName') {
+                        valA = a.MNAME?.trim().toLowerCase() || '';
+                        valB = b.MNAME?.trim().toLowerCase() || '';
+                    } else if (currentSortColumn === 'totalMarks') {
+                        valA = parseInt(a.TOT_MARKS, 10) || 0;
+                        valB = parseInt(b.TOT_MARKS, 10) || 0;
+                    } else if (currentSortColumn === 'percentage') {
+                        valA = parseFloat(a.PER) || 0;
+                        valB = parseFloat(b.PER) || 0;
+                    } else if (currentSortColumn === 'result') {
+                        valA = a.RESULT?.trim().toLowerCase() || '';
+                        valB = b.RESULT?.trim().toLowerCase() || '';
+                    } else if (sortedSubjectHeaders.some(header => currentSortColumn === header.split('_')[0])) {
+                        const subjectKeyPrefix = currentSortColumn;
+                        let foundA = false;
+                        let foundB = false;
+                        for (let i = 1; i <= 13; i++) {
+                            if (a[`SC${i}`]?.trim() === subjectKeyPrefix) {
+                                valA = parseInt(a[`TOT${i}`]?.replace(/[^\d.-]/g, ''), 10) || 0;
+                                foundA = true;
+                            }
+                            if (b[`SC${i}`]?.trim() === subjectKeyPrefix) {
+                                valB = parseInt(b[`TOT${i}`]?.replace(/[^\d.-]/g, ''), 10) || 0;
+                                foundB = true;
+                            }
+                            if (foundA && foundB) break;
+                        }
+                    }
+
+                    if (typeof valA === 'string') {
+                        return currentSortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                    } else {
+                        return currentSortDirection === 'asc' ? valA - valB : valB - valA;
+                    }
+                });
+
+
+                studentsArray.forEach((studentData, index) => {
+                    const row = resultsTableBody.insertRow();
+
+                    row.insertCell().textContent = index + 1;
+                    row.insertCell().textContent = studentData.ROLL_NO || 'N/A';
+
+                    if (includePersonal) {
+                        row.insertCell().textContent = studentData.CAN_NAME || 'N/A';
+                        row.insertCell().textContent = studentData.FNAME || 'N/A';
+                        if (showMothersName) {
+                            row.insertCell().textContent = studentData.MNAME || 'N/A';
+                        }
+                    }
+
+                    const studentSubjectTotalMarksMap = {};
+                    for (let i = 1; i <= 13; i++) {
+                        const subjectCode = `SC${i}`;
+                        const totalCode = `TOT${i}`;
+                        if (studentData[subjectCode] && studentData[subjectCode].trim() !== '') {
+                            studentSubjectTotalMarksMap[`${studentData[subjectCode].trim()}_${totalCode}`] = studentData[totalCode]?.trim() || '';
+                        }
+                    }
+
+                    sortedSubjectHeaders.forEach(headerKey => {
+                        const cell = row.insertCell();
+                        cell.textContent = studentSubjectTotalMarksMap[headerKey] || '';
+                    });
+
+                    row.insertCell().textContent = studentData.TOT_MARKS?.trim() || 'N/A';
+                    row.insertCell().textContent = studentData.PER !== null ? parseFloat(studentData.PER) : 'N/A';
+                    row.insertCell().textContent = studentData.RESULT?.trim() || 'N/A';
+                });
+                setupSortingListeners();
+            }
+
+            function updateTableHeaders() {
+                const theadRow = document.querySelector('.student-table thead tr');
+                theadRow.innerHTML = '';
+
+                const includePersonal = includePersonalDetailsCheckbox.checked;
+                const showMothersName = hideMothersNameCheckbox.checked;
+                const showEmptySubjectColumns = hideEmptySubjectColumnsCheckbox.checked;
+                const hideTrailingEmptySubjectColumns = hideTrailingEmptySubjectColumnsCheckbox.checked;
+
+                const initialFixedHeaders = [
+                    { key: 'srno', text: 'S.No.' },
+                    { key: 'rollno', text: 'Roll No.' }
+                ];
+                const personalHeaders = [
+                    { key: 'name', text: 'Name' },
+                    { key: 'fathersName', text: 'Father\'s Name' },
+                    { key: 'mothersName', text: 'Mother\'s Name' }
+                ];
+                const finalFixedHeaders = [
+                    { key: 'totalMarks', text: 'Total Marks' },
+                    { key: 'percentage', text: 'Percentage' },
+                    { key: 'result', text: 'Result' }
+                ];
+
+                initialFixedHeaders.forEach(headerInfo => {
+                    const th = document.createElement('th');
+                    th.dataset.columnKey = headerInfo.key;
+                    th.textContent = headerInfo.text;
+                    th.innerHTML += ' <i class="fas fa-sort sort-icon"></i>';
+                    theadRow.appendChild(th);
+                });
+
+                if (includePersonal) {
+                    personalHeaders.forEach(headerInfo => {
+                        if (headerInfo.key === 'mothersName' && !showMothersName) {
+                            return;
+                        }
+                        const th = document.createElement('th');
+                        th.dataset.columnKey = headerInfo.key;
+                        th.textContent = headerInfo.text;
+                        th.innerHTML += ' <i class="fas fa-sort sort-icon"></i>';
+                        theadRow.appendChild(th);
+                    });
+                }
+
+                let actualSubjectHeaders = Array.from(allSubjectHeaders);
+
+                if (!showEmptySubjectColumns) {
+                    actualSubjectHeaders = actualSubjectHeaders.filter(headerKey => {
+                        const subjectName = headerKey.split('_')[0];
+                        return Object.values(final_result).some(student => {
+                            for (let i = 1; i <= 13; i++) {
+                                const subjectCode = `SC${i}`;
+                                const totalCode = `TOT${i}`;
+                                if (student[subjectCode]?.trim() === subjectName && student[totalCode]?.trim() !== '') {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        });
+                    });
+                }
+
+                if (hideTrailingEmptySubjectColumns) {
+                    let firstEmptySubjectIndex = -1;
+                    const studentsArray = Object.values(final_result);
+                    for (let i = 1; i <= 13; i++) {
+                        const subjectCode = `SC${i}`;
+                        const allStudentsHaveEmptySubject = studentsArray.every(student => {
+                            const subjectValue = student[subjectCode];
+                            return !subjectValue || subjectValue.trim() === '';
+                        });
+
+                        if (allStudentsHaveEmptySubject) {
+                            firstEmptySubjectIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (firstEmptySubjectIndex !== -1) {
+                        actualSubjectHeaders = actualSubjectHeaders.filter(headerKey => {
+                            let headerSCIndex = -1;
+                            for (const rollNo in final_result) {
+                                const student = final_result[rollNo];
+                                for (let i = 1; i <= 13; i++) {
+                                    if (student[`SC${i}`] && `${student[`SC${i}`].trim()}_TOT${i}` === headerKey) {
+                                        headerSCIndex = i;
+                                        break;
+                                    }
+                                }
+                                if (headerSCIndex !== -1) break;
+                            }
+                            return headerSCIndex !== -1 && headerSCIndex < firstEmptySubjectIndex;
+                        });
+                    }
+                }
+
+                const sortedSubjectHeaders = actualSubjectHeaders.sort((a, b) => {
+                    let indexA = -1;
+                    let indexB = -1;
+
+                    for (const rollNo in final_result) {
+                        const student = final_result[rollNo];
+                        for (let i = 1; i <= 13; i++) {
+                            if (`${student[`SC${i}`]?.trim()}_TOT${i}` === a) {
+                                indexA = i;
+                                break;
+                            }
+                        }
+                        if (indexA !== -1) break;
+                    }
+
+                    for (const rollNo in final_result) {
+                        const student = final_result[rollNo];
+                        for (let i = 1; i <= 13; i++) {
+                            if (`${student[`SC${i}`]?.trim()}_TOT${i}` === b) {
+                                indexB = i;
+                                break;
+                            }
+                        }
+                        if (indexB !== -1) break;
+                    }
+                    return indexA - indexB;
+                });
+
+                sortedSubjectHeaders.forEach(headerKey => {
+                    const th = document.createElement('th');
+                    const parts = headerKey.split('_');
+                    const subject = parts[0];
+                    th.textContent = `${subject}`;
+                    th.dataset.columnKey = subject; // Use subject name as column key
+                    th.innerHTML += ' <i class="fas fa-sort sort-icon"></i>';
+                    theadRow.appendChild(th);
+                });
+
+                finalFixedHeaders.forEach(headerInfo => {
+                    const th = document.createElement('th');
+                    th.dataset.columnKey = headerInfo.key;
+                    th.textContent = headerInfo.text;
+                    th.innerHTML += ' <i class="fas fa-sort sort-icon"></i>';
+                    theadRow.appendChild(th);
+                });
+
+                document.querySelectorAll('.student-table thead th').forEach(th => {
+                    th.classList.remove('sorted-asc', 'sorted-desc');
+                    const icon = th.querySelector('.sort-icon');
+                    if (icon) {
+                        icon.classList.remove('fa-sort-up', 'fa-sort-down', 'fa-sort');
+                        if (th.dataset.columnKey === currentSortColumn) {
+                            th.classList.add(currentSortDirection === 'asc' ? 'sorted-asc' : 'sorted-desc');
+                            icon.classList.add(currentSortDirection === 'asc' ? 'fa-sort-up' : 'fa-sort-down');
+                            icon.style.opacity = '1';
+                        } else {
+                            icon.classList.add('fa-sort');
+                            icon.style.opacity = '0.4';
+                        }
+                    }
+                });
+                setupSortingListeners();
+            }
+
+            function generateSummary() {
+                const resultCounts = {};
+                let totalStudents = 0;
+
+                for (const rollNo in final_result) {
+                    const student = final_result[rollNo];
+                    const rawResultText = (student.RESULT || 'N/A').trim();
+                    const cleanedResultText = rawResultText.replace(/ By Grace/gi, '').trim();
+
+                    resultCounts[cleanedResultText] = (resultCounts[cleanedResultText] || 0) + 1;
+                    totalStudents++;
+                }
+
+                summaryTableHeader.innerHTML = '';
+                summaryTableBody.innerHTML = '';
+
+                const customOrder = [
+                    'FIRST DIVISION',
+                    'SECOND DIVISION',
+                    'THIRD DIVISION',
+                    'PASS',
+                    'SUPPL',
+                    'FAIL',
+                    'ABSENT',
+                    'N/A'
+                ];
+
+                const sortedResultCategories = Object.keys(resultCounts).sort((a, b) => {
+                    const indexA = customOrder.indexOf(a.toUpperCase());
+                    const indexB = customOrder.indexOf(b.toUpperCase());
+
+                    if (indexA === -1 && indexB === -1) {
+                        return a.localeCompare(b);
+                    } else if (indexA === -1) {
+                        return 1;
+                    } else if (indexB === -1) {
+                        return -1;
+                    } else {
+                        return indexA - indexB;
+                    }
+                });
+
+                // Add the "Result Summary" heading row to the summary table header
+                const summaryTitleRow = summaryTableHeader.insertRow();
+                const summaryTitleCell = summaryTitleRow.insertCell();
+                summaryTitleCell.colSpan = sortedResultCategories.length + 1; // +1 for "Total Students" column
+                summaryTitleCell.textContent = 'Result Summary';
+                summaryTitleCell.style.fontWeight = 'bold';
+                summaryTitleCell.style.textAlign = 'center';
+                summaryTitleCell.style.backgroundColor = '#e9ecef';
+
+
+                const headerRow = summaryTableHeader.insertRow();
+                headerRow.insertCell().textContent = 'Total Students';
+                sortedResultCategories.forEach(category => {
+                    headerRow.insertCell().textContent = category;
+                });
+
+                const dataRow = summaryTableBody.insertRow();
+                dataRow.insertCell().textContent = totalStudents;
+                sortedResultCategories.forEach(category => {
+                    dataRow.insertCell().textContent = resultCounts[category];
+                });
+
+                summaryCard.style.display = 'block';
+            }
+
+            async function generatePdf() {
+                const element = document.getElementById('resultsSection');
+
+                // Add the pdf-capture-mode class to the body to apply print-like styles
+                document.body.classList.add('pdf-capture-mode');
+
+                try {
+                    const canvas = await html2canvas(document.body, { // Capture the entire body to include header/footer if needed
+                        scale: 2, // Higher scale for better resolution
+                        useCORS: true, // Enable CORS if external images are used
+                        logging: true, // Enable logging for debugging
+                        windowWidth: document.body.scrollWidth, // Capture full scrollable width
+                        windowHeight: document.body.scrollHeight // Capture full scrollable height
+                    });
+                    const imgData = canvas.toDataURL('image/png');
+
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait, mm units, A4 size
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 297; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+
+                    let position = 0;
+
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    while (heightLeft >= -5) { // Adjusted condition to handle slight overflow
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    // Generate dynamic filename
+                    const schoolNameForFile = targetSchoolName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    const filename = `Board_Result_${schoolNameForFile}_${selectedClassText}_${selectedYear}.pdf`;
+                    pdf.save(filename);
+
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('Failed to generate PDF. Please try again. Check console for details.');
+                } finally {
+                    // Remove the pdf-capture-mode class after capture
+                    document.body.classList.remove('pdf-capture-mode');
+                }
+            }
+
+
+            // Initial load of settings and populating dropdowns
+            loadSettings();
+            populateBoards(); // This will initiate populating years and classes
+        });
+    </script>
+</body>
+</html>
